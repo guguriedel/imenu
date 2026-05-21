@@ -1,0 +1,16 @@
+[
+  {
+    "id": "pizza-fermentacao-lenta",
+    "title": "Pizza de Fermentação Lenta",
+    "file": "pizza-fermentacao-lenta.html",
+    "category": "Massas",
+    "tags": ["italiana", "pizza", "fermentação", "forno"],
+    "emoji": "🍕",
+    "color": "#B85C2A",
+    "description": "Massa sovada em batedeira, fermentação lenta de 24–72h na geladeira. Com modo cozinha e timers nativos.",
+    "time": "72h",
+    "difficulty": "Médio",
+    "servings": 4,
+    "added": "2026-05-21"
+  }
+]

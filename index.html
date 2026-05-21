@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Livro de Receitas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF6EE;
+      --warm-white: #FFF9F3;
+      --espresso: #1A110A;
+      --olive: #4A5C1A;
+      --terracotta: #B85C2A;
+      --gold: #C4973A;
+      --muted: #7A6552;
+      --light-muted: #A89880;
+      --divider: #E0D5C5;
+      --card-shadow: 0 2px 16px rgba(26,17,10,.07);
+      --card-shadow-hover: 0 8px 32px rgba(26,17,10,.13);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,246,238,.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--divider);
+      padding: 0 clamp(20px,5vw,60px);
+      display: flex; align-items: center;
+      gap: 20px; height: 64px;
+    }
+    .topbar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--espresso); white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topbar-title em { font-style: italic; color: var(--terracotta); }
+
+    .search-wrap {
+      flex: 1; position: relative; max-width: 420px;
+    }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--light-muted); font-size: 15px; pointer-events: none;
+    }
+    .search-input {
+      width: 100%; padding: 9px 14px 9px 38px;
+      background: var(--warm-white);
+      border: 1px solid var(--divider);
+      border-radius: 100px;
+      font-family: 'Crimson Pro', serif; font-size: .95rem;
+      color: var(--espresso);
+      outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .search-input:focus { border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(184,92,42,.1); }
+    .search-input::placeholder { color: var(--light-muted); }
+    .search-clear {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--light-muted); font-size: 1rem; padding: 0 4px;
+      display: none; line-height: 1;
+    }
+    .search-clear.visible { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 64px clamp(20px,5vw,60px) 40px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: block; font-size: 11px; font-weight: 600;
+      letter-spacing: .28em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem,5vw,3.8rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--espresso); margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: italic; color: var(--terracotta); }
+    .hero-sub {
+      color: var(--muted); font-size: 1.05rem;
+      font-style: italic; max-width: 480px;
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      display: flex; gap: 28px;
+      padding: 0 clamp(20px,5vw,60px) 32px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .stat { display: flex; align-items: baseline; gap: 6px; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--terracotta);
+    }
+    .stat-label { font-size: .85rem; color: var(--muted); }
+
+    /* ── CATEGORY FILTERS ── */
+    .filters-wrap {
+      padding: 0 clamp(20px,5vw,60px) 28px;
+      max-width: 1200px; margin: 0 auto;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filters-wrap::-webkit-scrollbar { display: none; }
+    .filters {
+      display: flex; gap: 8px;
+      width: max-content; min-width: 100%;
+    }
+    .filter-btn {
+      padding: 6px 18px; border-radius: 100px;
+      border: 1px solid var(--divider);
+      background: var(--warm-white);
+      font-family: 'Crimson Pro', serif; font-size: .9rem;
+      color: var(--muted); cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .filter-btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
+    .filter-btn.active {
+      background: var(--terracotta); color: var(--cream);
+      border-color: var(--terracotta); font-weight: 600;
+    }
+
+    /* ── GRID ── */
+    .grid-wrap {
+      padding: 0 clamp(20px,5vw,60px) 80px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+      gap: 20px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--warm-white);
+      border: 1px solid var(--divider);
+      border-radius: 16px; overflow: hidden;
+      cursor: pointer; text-decoration: none;
+      display: flex; flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: var(--card-shadow);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
+
+    .card-accent {
+      height: 90px; display: flex;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-accent-bg {
+      position: absolute; inset: 0;
+      opacity: .15;
+    }
+    .card-emoji {
+      font-size: 2.8rem; position: relative; z-index: 1;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.12));
+    }
+    .card-category {
+      position: absolute; top: 10px; right: 12px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px; background: rgba(255,255,255,.88);
+      color: var(--muted);
+    }
+
+    .card-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--espresso); line-height: 1.2;
+    }
+    .card-desc {
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.55; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-meta {
+      display: flex; gap: 14px; margin-top: 4px;
+    }
+    .card-meta-item {
+      display: flex; align-items: center; gap: 4px;
+      font-size: .8rem; color: var(--light-muted);
+    }
+    .card-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--divider); }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px; border-top: 1px solid var(--divider);
+    }
+    .card-tags {
+      display: flex; gap: 5px; flex-wrap: wrap;
+    }
+    .tag {
+      font-size: .72rem; letter-spacing: .08em;
+      padding: 2px 8px; border-radius: 4px;
+      background: rgba(74,92,26,.08);
+      color: var(--olive);
+    }
+    .card-open {
+      font-size: .82rem; font-weight: 600;
+      color: var(--terracotta); white-space: nowrap;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 20px; text-align: center; gap: 12px;
+    }
+    .empty.visible { display: flex; }
+    .empty-icon { font-size: 3rem; opacity: .4; }
+    .empty-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--muted);
+    }
+    .empty-sub { font-size: .95rem; color: var(--light-muted); font-style: italic; }
+
+    /* ── SORT BAR ── */
+    .sort-bar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 0 16px;
+    }
+    .results-count { font-size: .88rem; color: var(--muted); font-style: italic; }
+    .sort-select {
+      font-family: 'Crimson Pro', serif; font-size: .88rem;
+      color: var(--muted); background: transparent;
+      border: none; cursor: pointer; outline: none;
+    }
+
+    /* ── ADD BANNER ── */
+    .add-banner {
+      padding: 0 clamp(20px,5vw,60px) 0;
+      max-width: 1200px; margin: 0 auto 28px;
+    }
+    .add-banner-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; background: var(--warm-white);
+      border: 1px dashed var(--divider); border-radius: 12px;
+      gap: 12px;
+    }
+    .add-hint { font-size: .88rem; color: var(--light-muted); font-style: italic; }
+    .add-hint code {
+      font-family: 'Courier New', monospace; font-size: .82rem;
+      color: var(--olive); background: rgba(74,92,26,.08);
+      padding: 1px 5px; border-radius: 3px;
+    }
+    .add-hint-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--terracotta);
+      white-space: nowrap;
+    }
+
+    /* ── LOADING ── */
+    .loading {
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px; gap: 10px;
+      font-style: italic; color: var(--light-muted);
+    }
+
+    /* ── SEARCH HIGHLIGHT ── */
+    mark {
+      background: rgba(184,92,42,.18);
+      color: var(--espresso); border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    @media (max-width: 600px) {
+      .topbar-title { font-size: .95rem; }
+      .hero { padding: 40px 20px 28px; }
+      .stats-bar { padding: 0 20px 20px; gap: 18px; }
+    }
+
+    @media print {
+      .topbar, .filters-wrap, .add-banner { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">📖 <span>Meu <em>Livro</em></span></div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+      type="search"
+      class="search-input"
+      id="search"
+      placeholder="Buscar receitas, ingredientes, tags…"
+      autocomplete="off"
+      oninput="handleSearch(this.value)"
+    />
+    <button class="search-clear" id="search-clear" onclick="clearSearch()" title="Limpar busca">✕</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Receitas da Casa</span>
+  <h1>O <em>Livro</em><br>de Receitas</h1>
+  <p class="hero-sub">Receitas testadas, documentadas e com modo cozinha.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar" id="stats-bar">
+  <div class="stat"><span class="stat-num" id="stat-total">—</span><span class="stat-label">receitas</span></div>
+  <div class="stat"><span class="stat-num" id="stat-cats">—</span><span class="stat-label">categorias</span></div>
+</div>
+
+<!-- FILTER PILLS -->
+<div class="filters-wrap">
+  <div class="filters" id="filters"></div>
+</div>
+
+<!-- ADD HINT -->
+<div class="add-banner">
+  <div class="add-banner-inner">
+    <span class="add-hint">
+      Para adicionar uma receita: crie o <code>.html</code> na pasta e adicione uma entrada em <code>recipes.json</code>
+    </span>
+    <span class="add-hint-label">Como adicionar</span>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div class="sort-bar">
+    <span class="results-count" id="results-count"></span>
+    <select class="sort-select" onchange="setSort(this.value)">
+      <option value="newest">Mais recentes</option>
+      <option value="alpha">A → Z</option>
+      <option value="difficulty">Dificuldade</option>
+    </select>
+  </div>
+
+  <div id="loading" class="loading">Carregando receitas…</div>
+  <div id="recipe-grid" class="recipe-grid"></div>
+  <div id="empty" class="empty">
+    <div class="empty-icon">🍽</div>
+    <div class="empty-title">Nenhuma receita encontrada</div>
+    <div class="empty-sub">Tente outro termo ou categoria</div>
+  </div>
+</div>
+
+<script>
+let ALL = [];
+let filtered = [];
+let activeCategory = 'Todas';
+let searchQuery = '';
+let sortMode = 'newest';
+
+const DIFF_ORDER = { 'Fácil':0, 'Médio':1, 'Difícil':2 };
+
+// ── Fetch recipes ──
+fetch('./recipes.json')
+  .then(r => { if(!r.ok) throw new Error('recipes.json não encontrado'); return r.json(); })
+  .then(data => {
+    ALL = data;
+    document.getElementById('loading').style.display = 'none';
+    buildFilters();
+    renderStats();
+    applyFilters();
+  })
+  .catch(err => {
+    document.getElementById('loading').innerHTML =
+      '<span style="color:var(--muted)">⚠ ' + err.message +
+      ' — abra pelo servidor (ex: Netlify Drop ou <code>python -m http.server</code>)</span>';
+  });
+
+// ── Filters ──
+function buildFilters() {
+  const cats = ['Todas', ...new Set(ALL.map(r => r.category).filter(Boolean))].sort((a,b) => a==='Todas'?-1:a.localeCompare(b,'pt'));
+  const wrap = document.getElementById('filters');
+  wrap.innerHTML = cats.map(c =>
+    `<button class="filter-btn${c===activeCategory?' active':''}" onclick="setCategory('${c}')">${c}</button>`
+  ).join('');
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.textContent===cat));
+  applyFilters();
+}
+
+// ── Search ──
+function handleSearch(val) {
+  searchQuery = val.trim().toLowerCase();
+  document.getElementById('search-clear').classList.toggle('visible', val.length > 0);
+  applyFilters();
+}
+
+function clearSearch() {
+  document.getElementById('search').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
+  searchQuery = '';
+  applyFilters();
+}
+
+function matchSearch(r, q) {
+  if (!q) return true;
+  return (
+    r.title?.toLowerCase().includes(q) ||
+    r.description?.toLowerCase().includes(q) ||
+    r.category?.toLowerCase().includes(q) ||
+    r.tags?.some(t => t.toLowerCase().includes(q))
+  );
+}
+
+function highlight(text, q) {
+  if (!q || !text) return text;
+  const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
+
+// ── Sort ──
+function setSort(mode) { sortMode = mode; applyFilters(); }
+
+function sortRecipes(arr) {
+  return [...arr].sort((a,b) => {
+    if (sortMode === 'alpha') return a.title.localeCompare(b.title,'pt');
+    if (sortMode === 'difficulty') return (DIFF_ORDER[a.difficulty]??99) - (DIFF_ORDER[b.difficulty]??99);
+    return new Date(b.added||0) - new Date(a.added||0);
+  });
+}
+
+// ── Apply ──
+function applyFilters() {
+  filtered = ALL
+    .filter(r => activeCategory === 'Todas' || r.category === activeCategory)
+    .filter(r => matchSearch(r, searchQuery));
+  filtered = sortRecipes(filtered);
+
+  renderStats();
+  renderCards();
+}
+
+function renderStats() {
+  const cats = new Set(ALL.map(r => r.category).filter(Boolean));
+  document.getElementById('stat-total').textContent = ALL.length;
+  document.getElementById('stat-cats').textContent = cats.size;
+  document.getElementById('results-count').textContent =
+    searchQuery || activeCategory !== 'Todas'
+      ? filtered.length + ' resultado' + (filtered.length !== 1 ? 's' : '')
+      : '';
+}
+
+// ── Render cards ──
+function renderCards() {
+  const grid = document.getElementById('recipe-grid');
+  const empty = document.getElementById('empty');
+  empty.classList.toggle('visible', filtered.length === 0);
+  grid.innerHTML = filtered.map(r => cardHTML(r)).join('');
+}
+
+function cardHTML(r) {
+  const titleHL = highlight(r.title, searchQuery);
+  const descHL  = highlight(r.description || '', searchQuery);
+  const tags = (r.tags || []).slice(0,3).map(t =>
+    `<span class="tag">${highlight(t, searchQuery)}</span>`
+  ).join('');
+  const accent = r.color || 'var(--terracotta)';
+
+  return `
+<a class="card" href="${r.file}" title="${r.title}">
+  <div class="card-accent">
+    <div class="card-accent-bg" style="background:${accent}"></div>
+    <span class="card-emoji">${r.emoji || '🍽'}</span>
+    ${r.category ? `<span class="card-category">${r.category}</span>` : ''}
+  </div>
+  <div class="card-body">
+    <div class="card-title">${titleHL}</div>
+    ${r.description ? `<div class="card-desc">${descHL}</div>` : ''}
+    <div class="card-meta">
+      ${r.time ? `<span class="card-meta-item">⏱ ${r.time}</span>` : ''}
+      ${r.time && r.servings ? `<span class="card-meta-dot"></span>` : ''}
+      ${r.servings ? `<span class="card-meta-item">🍽 ${r.servings} porç.</span>` : ''}
+      ${(r.time || r.servings) && r.difficulty ? `<span class="card-meta-dot"></span>` : ''}
+      ${r.difficulty ? `<span class="card-meta-item">${diffIcon(r.difficulty)} ${r.difficulty}</span>` : ''}
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="card-tags">${tags}</div>
+    <span class="card-open">Abrir →</span>
+  </div>
+</a>`;
+}
+
+function diffIcon(d) {
+  return d === 'Fácil' ? '🟢' : d === 'Médio' ? '🟡' : '🔴';
+}
+</script>
+</body>
+</html>
