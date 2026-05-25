@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Marry Me Chicken</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body class="recipe-page">
+
+<div class="recipe-container" id="recipe-view">
+
+  <a class="back-link" href="./index.html">← Voltar ao livro</a>
+
+  <header class="header">
+    <span class="eyebrow">Receita de Casa</span>
+    <h1><em>Marry Me</em><br>Chicken</h1>
+    <p class="tagline">Sobrecoxa dourada, molho cremoso de tomate seco e parmesão. Com tagliatelle.</p>
+  </header>
+
+  <!-- SERVINGS CONTROL -->
+  <div class="servings-bar">
+    <span class="srv-label">Porções</span>
+    <button class="srv-btn" onclick="changeServings(-1)">−</button>
+    <span class="srv-num" id="srv-display">4</span>
+    <button class="srv-btn" onclick="changeServings(1)">+</button>
+    <span class="srv-sub" id="srv-sub">~250 g de frango/pessoa</span>
+  </div>
+
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">Rendimento</span><span class="meta-value" id="meta-srv">4 porções</span></div>
+    <div class="meta-item"><span class="meta-label">Tempo total</span><span class="meta-value">~35 min</span></div>
+    <div class="meta-item"><span class="meta-label">Dificuldade</span><span class="meta-value">Fácil</span></div>
+  </div>
+
+  <!-- INGREDIENTS -->
+  <section class="ingredients-section">
+    <h2>Ingredientes</h2>
+
+    <div class="ingredient-row"><span class="amount" id="ing-chicken">1 kg</span><span class="ing-name">Sobrecoxa desossada e sem pele</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-pasta">400 g</span><span class="ing-name">Tagliatelle (ou macarrão de preferência)</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-extract">70 g</span><span class="ing-name">Extrato de tomate concentrado<span class="ing-note">~1/2 pote/lata</span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-sundried">80 g</span><span class="ing-name">Tomate seco em conserva<span class="ing-note">ou tomate cereja cortado ao meio</span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-cream">240 ml</span><span class="ing-name">Creme de leite fresco (nata)</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-parmesan">60 g</span><span class="ing-name">Parmesão ralado na hora</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-onion">1</span><span class="ing-name">Cebola grande, picada</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-garlic">10</span><span class="ing-name">Dentes de alho (1 cabeça), picados</span></div>
+    <div class="ingredient-row"><span class="amount">2 col.</span><span class="ing-name">Azeite de oliva extra virgem</span></div>
+    <div class="ingredient-row"><span class="amount">2 col.</span><span class="ing-name">Manteiga</span></div>
+
+    <div class="seasonings-box">
+      <span class="seasonings-label">Temperos — a gosto</span>
+      <div class="seasonings-grid">
+        <span class="seasoning-tag">Sazon</span>
+        <span class="seasoning-tag">Creme de cebola</span>
+        <span class="seasoning-tag">Páprica defumada</span>
+        <span class="seasoning-tag">Pimenta calabresa</span>
+        <span class="seasoning-tag">Orégano</span>
+        <span class="seasoning-tag">Pimenta do reino</span>
+        <span class="seasoning-tag">Sal</span>
+      </div>
+      <p class="seasonings-hint">Use os mesmos temperos no frango e no molho — exceto o Sazon, que fica só no frango.</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="steps-section">
+    <h2>Modo de Preparo</h2>
+
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <h3>Temperar o frango</h3>
+      <p>Seque as sobrecoxas com papel toalha. Tempere com <strong>Sazon, páprica, pimenta calabresa, orégano, pimenta do reino e creme de cebola</strong>. Esfregue bem e deixe descansar enquanto prepara o restante.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body">
+      <h3>Selar a sobrecoxa</h3>
+      <p>Numa panela ou frigideira grande, aqueça o azeite com a manteiga até cobrir o fundo. Em fogo alto, coloque as sobrecoxas e <strong>não mexa</strong> — deixe a crosta se formar. <strong>4 min de cada lado</strong>. Reserve o frango em um prato, mas <strong>não limpe a panela</strong> — o fundo dourado é ouro para o molho.</p>
+      <button class="timer-chip" onclick="startChip(this,4*60,'Lado 1')">⏱ Timer lado 1 — 4 min</button>
+      <button class="timer-chip" onclick="startChip(this,4*60,'Lado 2')" style="margin-left:8px">⏱ Timer lado 2 — 4 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">3</div><div class="step-body">
+      <h3>Refogar cebola e alho</h3>
+      <p>Na mesma panela, em fogo médio, refogue a cebola com os temperos do frango (sem Sazon) por <strong>3–4 min</strong> até começar a dourar. Acrescente o alho e refogue mais <strong>1 min</strong>.</p>
+      <button class="timer-chip" onclick="startChip(this,4*60,'Refogado')">⏱ Timer — 4 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">4</div><div class="step-body">
+      <h3>Secar a cebola</h3>
+      <p>Com a cebola quase dourada, adicione <strong>um pouquinho de água</strong> e espere secar completamente. Esse passo intensifica o sabor — a água dissolve o fond do fundo e a evaporação concentra tudo.</p>
+      <button class="timer-chip" onclick="startChip(this,3*60,'Secar')">⏱ Timer — 3 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">5</div><div class="step-body">
+      <h3>Extrato e tomates</h3>
+      <p>Adicione o extrato de tomate e refogue por <strong>2 min</strong> até caramelizar levemente (vai escurecer um pouco — é o certo). Acrescente o tomate seco picado e mais um fio de água. <strong>Corrija o sal agora.</strong></p>
+      <button class="timer-chip" onclick="startChip(this,2*60,'Extrato')">⏱ Timer — 2 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">6</div><div class="step-body">
+      <h3>Ferver a água do macarrão</h3>
+      <p>Coloque uma panela grande com água para ferver. Quando ferver, salgue generosamente — <strong>"água de mar"</strong>. Cozinhe o tagliatelle conforme a embalagem, al dente. Reserve <strong>1 xícara da água do cozimento</strong> antes de escorrer.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">7</div><div class="step-body">
+      <h3>Creme de leite e molho final</h3>
+      <p>Diminua o fogo para <strong>baixo</strong>. Adicione o creme de leite fresco aos poucos, mexendo. Não deixe ferver forte — o creme pode talhar. Incorpore o parmesão ralado e misture até derreter. O molho vai engrossar enquanto o macarrão termina de cozinhar.</p>
+      <button class="timer-chip" onclick="startChip(this,10*60,'Molho')">⏱ Timer — 10 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">8</div><div class="step-body">
+      <h3>Picar o frango e finalizar</h3>
+      <p>Pique as sobrecoxas reservadas em pedaços generosos. Misture no molho e aqueça por <strong>2 min</strong> em fogo baixo para o frango absorver o molho. Se o molho ficou espesso, solte com a água do macarrão reservada.</p>
+      <button class="timer-chip" onclick="startChip(this,2*60,'Finalizar')">⏱ Timer — 2 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">9</div><div class="step-body">
+      <h3>Montar e servir</h3>
+      <p>Sirva o tagliatelle com o molho e o frango por cima. Finalize com mais parmesão ralado e, se quiser, manjericão fresco ou salsinha picada. Sirva imediatamente — pasta espera por ninguém.</p>
+    </div></div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="notes-section">
+    <h2>Notas do Cozinheiro</h2>
+    <div class="notes-box">
+      <div class="note-line">
+        <strong>Por que sobrecoxa?</strong> Ela tem mais gordura intramuscular e colágeno do que o peito. Resultado: fica suculenta mesmo depois de cozida no molho, sem ressecar. O peito fica seco se cozinhar além do ponto.
+      </div>
+      <div class="note-line">
+        <strong>O fond é fundamental:</strong> Nunca limpe a panela entre o frango e o molho. Aquele fundo dourado que gruda é proteína caramelizada — dissolvendo com a cebola e a água, você transfere todo esse sabor pro molho.
+      </div>
+      <div class="note-line">
+        <strong>Creme de leite fresco vs. de caixinha (UHT):</strong> O fresco engrossa e emulsiona naturalmente. O UHT pode talhar se ferver — se usar, adicione fora do fogo ou em chama bem baixa.
+      </div>
+      <div class="note-line">
+        <span class="note-highlight">Dica</span>
+        <strong>Água do macarrão:</strong> Rica em amido, ela emulsifica o molho e o deixa sedoso. Sempre reserve antes de escorrer — é um segredo de chef.
+      </div>
+      <div class="note-line">
+        <strong>Tomate seco vs. cereja:</strong> O seco tem sabor mais concentrado e intenso. O cereja dá frescor e um leve adocicado. Pode combinar os dois.
+      </div>
+      <div class="note-line">
+        <strong>Créditos:</strong> Receita inspirada em <em>@fadwahilili</em> e <em>@fadwamasala</em> no Instagram, adaptada para sobrecoxa e para os temperos da casa.
+      </div>
+    </div>
+  </section>
+
+  <footer class="recipe-footer">
+    <span class="flour-deco">— ✦ —</span>
+    Melhor servido na hora. Boa mesa.
+  </footer>
+</div>
+
+<div class="cook-btn-wrap">
+  <button class="cook-btn" onclick="enterCook()">🍗 Modo Cozinha</button>
+</div>
+
+<!-- ══ COOKING MODE ══ -->
+<div id="cooking-mode">
+  <div class="cm-topbar">
+    <div class="cm-dots" id="cm-dots"></div>
+    <span class="cm-progress-text" id="cm-prog">1 / 9</span>
+    <button class="cm-close" onclick="exitCook()">✕</button>
+  </div>
+  <div class="cm-content" id="cm-content">
+    <div class="cm-step-number" id="cm-num">01</div>
+    <div class="cm-step-title"  id="cm-title"></div>
+    <div class="cm-step-text"   id="cm-text"></div>
+  </div>
+  <div class="cm-timer-area" id="cm-timer">
+    <div class="cm-ring-wrap">
+      <svg class="cm-svg" viewBox="0 0 170 170">
+        <circle class="ring-bg"   cx="85" cy="85" r="73.5"/>
+        <circle class="ring-prog" id="cm-ring" cx="85" cy="85" r="73.5" stroke-dasharray="462" stroke-dashoffset="0"/>
+      </svg>
+      <div class="cm-time-overlay">
+        <span class="cm-time-text"  id="cm-ttext">00:00</span>
+        <span class="cm-time-label" id="cm-tlabel">restante</span>
+      </div>
+    </div>
+    <div class="cm-timer-btns">
+      <button class="cm-btn-ghost"   onclick="resetTimer()">↺ Reset</button>
+      <button class="cm-btn-primary" id="cm-playbtn" onclick="toggleTimer()">▶ Iniciar</button>
+    </div>
+  </div>
+  <div class="cm-finish" id="cm-finish">
+    <div class="cm-finish-icon">🍗</div>
+    <div class="cm-finish-title">Bom Apetite!</div>
+    <div class="cm-finish-sub">Todos os passos concluídos.<br>Sirva agora — pasta não espera.</div>
+    <button class="cm-btn-primary" style="margin-top:8px" onclick="exitCook()">Voltar à receita</button>
+  </div>
+  <div class="cm-nav" id="cm-nav">
+    <button class="cm-nav-btn prev" id="cm-prev" onclick="goStep(-1)">
+      <span class="cm-nav-label">← Anterior</span>
+      <span id="cm-prev-lbl">—</span>
+    </button>
+    <button class="cm-nav-btn next" id="cm-next" onclick="goStep(1)">
+      <span class="cm-nav-label">Próximo →</span>
+      <span id="cm-next-lbl">—</span>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ══ BASE RECIPE (4 porções) ══ */
+const BASE = 4;
+const INGS = {
+  chicken:  { base: 1000, unit: 'g',  el: 'ing-chicken'  },
+  pasta:    { base: 400,  unit: 'g',  el: 'ing-pasta'    },
+  extract:  { base: 70,   unit: 'g',  el: 'ing-extract'  },
+  sundried: { base: 80,   unit: 'g',  el: 'ing-sundried' },
+  cream:    { base: 240,  unit: 'ml', el: 'ing-cream'    },
+  parmesan: { base: 60,   unit: 'g',  el: 'ing-parmesan' },
+};
+// Onion and garlic scaled separately (count)
+const ONION_BASE  = 1;
+const GARLIC_BASE = 10; // dentes
+
+let servings = 4;
+
+function fmt(val, unit) {
+  if (unit === 'g' || unit === 'ml') return Math.round(val) + ' ' + unit;
+  return val.toFixed(1).replace('.0', '') + ' ' + unit;
+}
+
+function changeServings(delta) {
+  servings = Math.max(1, Math.min(20, servings + delta));
+  const ratio = servings / BASE;
+
+  document.getElementById('srv-display').textContent = servings;
+  document.getElementById('srv-sub').textContent = '~250 g de frango/pessoa · ' + servings + ' porç' + (servings === 1 ? 'ão' : 'ões');
+  document.getElementById('meta-srv').textContent = servings + ' porç' + (servings === 1 ? 'ão' : 'ões');
+
+  Object.values(INGS).forEach(ing => {
+    const el = document.getElementById(ing.el);
+    el.style.opacity = '0.3';
+    el.textContent = fmt(ing.base * ratio, ing.unit);
+    setTimeout(() => el.style.opacity = '1', 150);
+  });
+
+  // Onion (count, round up to at least 1)
+  const onionEl = document.getElementById('ing-onion');
+  onionEl.style.opacity = '0.3';
+  onionEl.textContent = Math.max(1, Math.round(ONION_BASE * ratio));
+  setTimeout(() => onionEl.style.opacity = '1', 150);
+
+  // Garlic (dentes)
+  const garlicEl = document.getElementById('ing-garlic');
+  garlicEl.style.opacity = '0.3';
+  garlicEl.textContent = Math.max(3, Math.round(GARLIC_BASE * ratio));
+  setTimeout(() => garlicEl.style.opacity = '1', 150);
+}
+
+/* ══ AUDIO ══ */
+function beep() {
+  try {
+    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+    [880, 1100, 880, 1100, 880].forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type = 'sine'; o.frequency.value = f;
+      const t = ctx.currentTime + i * .38;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(.4, t + .04);
+      g.gain.exponentialRampToValueAtTime(.001, t + .32);
+      o.start(t); o.stop(t + .35);
+    });
+  } catch(e) {}
+}
+
+/* ══ WAKE LOCK ══ */
+let wl = null;
+async function grabLock() { try { if ('wakeLock' in navigator) wl = await navigator.wakeLock.request('screen'); } catch(e) {} }
+function dropLock() { if (wl) { wl.release(); wl = null; } }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && document.getElementById('cooking-mode').classList.contains('active')) grabLock();
+});
+
+/* ══ TIMER ══ */
+const CIRC = 2 * Math.PI * 73.5;
+let tRem = 0, tTotal = 0, tRunning = false, tiv = null;
+
+function fmtT(s) { return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }
+function updateRing() {
+  const p = tTotal > 0 ? tRem / tTotal : 1;
+  document.getElementById('cm-ring').style.strokeDashoffset = CIRC * (1 - p);
+  document.getElementById('cm-ring').classList.toggle('done', tRem === 0 && tTotal > 0);
+}
+function setDisplay(s) { document.getElementById('cm-ttext').textContent = fmtT(s); updateRing(); }
+
+function toggleTimer() {
+  if (tRem === 0) { resetTimer(); return; }
+  tRunning = !tRunning;
+  const btn = document.getElementById('cm-playbtn');
+  if (tRunning) {
+    btn.textContent = '⏸ Pausar';
+    tiv = setInterval(() => {
+      tRem--;
+      setDisplay(tRem);
+      if (tRem <= 0) {
+        clearInterval(tiv); tRunning = false;
+        btn.textContent = '✓ Pronto';
+        document.getElementById('cm-tlabel').textContent = 'concluído!';
+        beep();
+      }
+    }, 1000);
+  } else {
+    clearInterval(tiv);
+    btn.textContent = '▶ Continuar';
+  }
+}
+function resetTimer() {
+  clearInterval(tiv); tRunning = false; tRem = tTotal;
+  setDisplay(tRem);
+  document.getElementById('cm-playbtn').textContent = '▶ Iniciar';
+  document.getElementById('cm-tlabel').textContent = 'restante';
+}
+
+/* ══ COOKING MODE STEPS ══ */
+function getCookSteps() {
+  const s = servings;
+  const ratio = s / BASE;
+  const chicken  = fmt(1000 * ratio, 'g');
+  const cream    = fmt(240  * ratio, 'ml');
+  const extract  = fmt(70   * ratio, 'g');
+  const sundried = fmt(80   * ratio, 'g');
+  const parmesan = fmt(60   * ratio, 'g');
+  const pasta    = fmt(400  * ratio, 'g');
+  const onion    = Math.max(1, Math.round(ONION_BASE * ratio));
+  const garlic   = Math.max(3, Math.round(GARLIC_BASE * ratio));
+
+  return [
+    {
+      title: "Temperar o frango",
+      timer: null,
+      text: `Seque <strong>${chicken} de sobrecoxa</strong> com papel toalha. Tempere com <strong>Sazon, páprica, pimenta calabresa, orégano, pimenta do reino e creme de cebola</strong>. Esfregue bem e reserve.`
+    },
+    {
+      title: "Selar a sobrecoxa",
+      timer: 4 * 60,
+      text: `Aqueça azeite e manteiga na panela em fogo <strong>alto</strong>. Sele as sobrecoxas por <strong>4 min de cada lado</strong> sem mexer — deixe a crosta dourar. Reserve num prato. <strong>Não limpe a panela.</strong>`
+    },
+    {
+      title: "Refogar cebola e alho",
+      timer: 4 * 60,
+      text: `Na mesma panela, fogo médio, refogue <strong>${onion} cebola${onion > 1 ? 's' : ''}</strong> com os temperos (sem Sazon) por 3–4 min. Acrescente <strong>${garlic} dentes de alho</strong> e refogue mais 1 min.`
+    },
+    {
+      title: "Secar a cebola",
+      timer: 3 * 60,
+      text: `Com a cebola quase dourada, adicione <strong>um pouquinho de água</strong> e espere secar. Isso dissolve o fundo caramelizado e concentra o sabor. Aguarde até a água evaporar completamente.`
+    },
+    {
+      title: "Extrato e tomates",
+      timer: 2 * 60,
+      text: `Adicione <strong>${extract} de extrato de tomate</strong> e refogue por 2 min até escurecer levemente. Junte <strong>${sundried} de tomate seco</strong> picado e um fio de água. <strong>Corrija o sal agora.</strong>`
+    },
+    {
+      title: "Ferver o macarrão",
+      timer: null,
+      text: `Coloque o <strong>${pasta} de tagliatelle</strong> em água fervente bem salgada. Cozinhe al dente conforme a embalagem. <strong>Reserve 1 xícara da água antes de escorrer</strong> — ela vai ajudar o molho.`
+    },
+    {
+      title: "Creme de leite e parmesão",
+      timer: 10 * 60,
+      text: `Diminua o fogo para <strong>baixo</strong>. Adicione <strong>${cream} de creme de leite fresco</strong> aos poucos, mexendo. Incorpore <strong>${parmesan} de parmesão</strong> ralado. Não deixe ferver forte. Misture até engrossar enquanto a pasta termina.`
+    },
+    {
+      title: "Picar o frango e finalizar",
+      timer: 2 * 60,
+      text: `Pique as sobrecoxas em pedaços generosos. Misture no molho e aqueça em fogo baixo por <strong>2 min</strong>. Se o molho ficou espesso, solte com a água do macarrão reservada.`
+    },
+    {
+      title: "Montar e servir",
+      timer: null,
+      text: `Sirva o tagliatelle com o molho e o frango por cima. Finalize com <strong>mais parmesão</strong> e manjericão ou salsinha. Sirva agora — pasta não espera!`
+    },
+  ];
+}
+
+let cur = 0;
+function render(idx) {
+  clearInterval(tiv); tRunning = false;
+  const steps = getCookSteps();
+  const done = idx >= steps.length;
+
+  document.getElementById('cm-finish').classList.toggle('active', done);
+  document.getElementById('cm-content').style.display = done ? 'none' : 'flex';
+  document.getElementById('cm-timer').style.display = 'none';
+  document.getElementById('cm-nav').style.display = done ? 'none' : 'grid';
+  if (done) return;
+
+  const s = steps[idx];
+  document.getElementById('cm-prog').textContent = `${idx + 1} / ${steps.length}`;
+
+  const dots = document.getElementById('cm-dots');
+  dots.innerHTML = '';
+  steps.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'cm-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
+    dots.appendChild(d);
+  });
+
+  document.getElementById('cm-num').textContent = String(idx + 1).padStart(2, '0');
+  document.getElementById('cm-title').textContent = s.title;
+  document.getElementById('cm-text').innerHTML = s.text;
+
+  if (s.timer) {
+    tTotal = s.timer; tRem = s.timer;
+    setDisplay(tRem);
+    document.getElementById('cm-playbtn').textContent = '▶ Iniciar';
+    document.getElementById('cm-tlabel').textContent = 'restante';
+    document.getElementById('cm-timer').style.display = 'flex';
+  }
+
+  document.getElementById('cm-prev').disabled = idx === 0;
+  document.getElementById('cm-prev-lbl').textContent = idx > 0 ? steps[idx - 1].title : '—';
+  document.getElementById('cm-next-lbl').textContent = idx < steps.length - 1 ? steps[idx + 1].title : 'Finalizar';
+  document.getElementById('cm-content').scrollTop = 0;
+}
+
+function goStep(d) { clearInterval(tiv); tRunning = false; cur = Math.max(0, cur + d); render(cur); }
+function enterCook() { cur = 0; document.getElementById('cooking-mode').classList.add('active'); render(0); grabLock(); document.body.style.overflow = 'hidden'; }
+function exitCook() { clearInterval(tiv); tRunning = false; document.getElementById('cooking-mode').classList.remove('active'); dropLock(); document.body.style.overflow = ''; }
+
+/* ══ INLINE CHIP TIMERS ══ */
+const chipIntervals = {};
+function startChip(btn, sec, label) {
+  clearInterval(chipIntervals[label]);
+  let rem = sec;
+  btn.textContent = `⏱ ${label} — ${fmtT(rem)}`;
+  btn.style.cssText = 'background:var(--terracotta);color:var(--cream);border-color:var(--terracotta)';
+  btn.onclick = () => cancelChip(btn, sec, label);
+  chipIntervals[label] = setInterval(() => {
+    rem--;
+    btn.textContent = `⏱ ${label} — ${fmtT(rem)}`;
+    if (rem <= 0) {
+      clearInterval(chipIntervals[label]);
+      btn.textContent = `✓ ${label} — Pronto!`;
+      btn.style.cssText = 'background:#4A5C1A;color:var(--cream);border-color:#4A5C1A';
+      beep();
+    }
+  }, 1000);
+}
+function cancelChip(btn, sec, label) {
+  clearInterval(chipIntervals[label]);
+  btn.textContent = `⏱ Timer ${Math.round(sec / 60)} min`;
+  btn.style.cssText = '';
+  btn.onclick = () => startChip(btn, sec, label);
+}
+</script>
+</body>
+</html>

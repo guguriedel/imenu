@@ -12,5 +12,19 @@
     "difficulty": "Médio",
     "servings": 4,
     "added": "2026-05-21"
+  },
+    {
+    "id": "marry_me_chicken",
+    "title": "Marry Me Chicken",
+    "file": "marry_me_chicken.html",
+    "category": "Massas",
+    "tags": ["chicken", "pasta", "frango"],
+    "emoji": "🍗",
+    "color": "#B85C2A",
+    "description": "Macarraõ com molho cremoso de tomate, e sobrecoxa desossada",
+    "time": "30m",
+    "difficulty": "Fácil",
+    "servings": 4,
+    "added": "2026-05-21"
   }
 ]
