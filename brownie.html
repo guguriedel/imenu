@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>O Melhor Brownie do Mundo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+
+<div class="recipe-container" id="recipe-view">
+
+  <a class="back-link" href="./index.html">← Voltar ao livro</a>
+
+  <header class="header">
+    <span class="eyebrow">Receita de Casa</span>
+    <h1>O Melhor<br><em>Brownie</em> do Mundo</h1>
+    <p class="tagline">Denso, fudgy, com pedaços de chocolate meio amargo. Melhor do que qualquer confeitaria.</p>
+  </header>
+
+  <!-- SERVINGS -->
+  <div class="servings-bar">
+    <span class="srv-label">Formas</span>
+    <button class="srv-btn" onclick="changeServings(-1)">−</button>
+    <span class="srv-num" id="srv-display">1</span>
+    <button class="srv-btn" onclick="changeServings(1)">+</button>
+    <span class="srv-sub" id="srv-sub">~16 pedaços por forma</span>
+  </div>
+
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">Rendimento</span><span class="meta-value" id="meta-yield">~16 pedaços</span></div>
+    <div class="meta-item"><span class="meta-label">Forno</span><span class="meta-value">180 °C</span></div>
+    <div class="meta-item"><span class="meta-label">Tempo de assar</span><span class="meta-value">40 min</span></div>
+  </div>
+
+  <!-- INGREDIENTS -->
+  <section class="ingredients-section">
+    <h2>Ingredientes</h2>
+    <div class="ingredient-row"><span class="amount" id="ing-choc-melt">200 g</span><span class="ing-name">Chocolate meio amargo<span class="ing-note">para derreter com a manteiga</span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-butter">150 g</span><span class="ing-name">Manteiga sem sal</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-choc-pieces">150 g</span><span class="ing-name">Chocolate meio amargo/ao leite picado<span class="ing-note">incorporado na massa — 100 a 200 g a gosto</span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-flour">90 g</span><span class="ing-name">Farinha de trigo<span class="ing-note"></span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-cocoa">84 g</span><span class="ing-name">Chocolate em pó<span class="ing-note"></span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-brown">100 g</span><span class="ing-name">Açúcar mascavo<span class="ing-note"></span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-white">140 g</span><span class="ing-name">Açúcar refinado<span class="ing-note"></span></span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-eggs">3</span><span class="ing-name">Ovos — adicionados um de cada vez</span></div>
+    <div class="ingredient-row"><span class="amount">1 pitada</span><span class="ing-name">Sal</span></div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="steps-section">
+    <h2>Modo de Preparo</h2>
+
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <h3>Preparar a forma e o forno</h3>
+      <p>Preaqueça o forno a <strong>180 °C</strong>. Forre uma forma retangular (20×20 cm ou similar) com papel manteiga deixando sobra nas bordas — isso facilita desenformar depois. Alternativamente, passe manteiga no fundo da assadeira e um pouco de farinha ou chocolate em pó. Reserve.</p>
+      <button class="timer-chip" onclick="startChip(this,15*60,'Pré-aquecer forno')">⏱ Timer pré-aquecimento — 15 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body">
+      <h3>Derreter chocolate e manteiga</h3>
+      <p>Em banho-maria ou no microondas (intervalos de 30s), derreta os <strong id="step-choc-melt">200 g de chocolate meio amargo</strong> com os <strong id="step-butter">150 g de manteiga</strong>. Misture até ficar completamente liso e brilhante. Cuidado apenas com a temperatura, ovos não podem ir em chocolate quente.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">3</div><div class="step-body">
+      <h3>Peneirar os secos</h3>
+      <p>Numa tigela, peneire juntos a <strong id="step-flour">farinha (90 g)</strong>, o <strong id="step-cocoa">chocolate em pó (84 g)</strong>, o <strong id="step-brown">açúcar mascavo (100 g)</strong> e o <strong id="step-white">açúcar refinado (140 g)</strong>. Peneirar evita grumos e incorpora ar levemente na massa.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">4</div><div class="step-body">
+      <h3>Misturar secos no chocolate</h3>
+      <p>Adicione a mistura peneirada ao chocolate derretido (já morno). Misture com a <strong>pá/raquete da batedeira</strong> (o batedor plano, não o fouet) em velocidade baixa até incorporar. A massa vai ficar bem espessa, é o isso mesmo.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">5</div><div class="step-body">
+      <h3>Adicionar os ovos</h3>
+      <p>Adicione os <strong id="step-eggs">3 ovos</strong> um de cada vez com a batedeira na velocidade baixa, misturando bem após cada adição. Adição gradual cria emulsão uniforme e dá estrutura sem desenvolver glúten.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">6</div><div class="step-body">
+      <h3>Sal e chocolate picado</h3>
+      <p>Adicione a pitada de sal e misture. Por último, incorpore os <strong id="step-choc-pieces">150 g de chocolate picado</strong> em pedaços. Eles vão derreter parcialmente no forno criando bolsos de chocolate. Misture só até distribuir.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">7</div><div class="step-body">
+      <h3>Assar</h3>
+      <p>Despeje a massa na forma preparada e nivele. Leve ao forno a <strong>180 °C por 40 minutos</strong>. O brownie está pronto quando o centro ainda balança levemente — ele termina de firmar fora do forno. Palito saindo com migalhas úmidas = perfeito. Palito limpo = passou do ponto.</p>
+      <button class="timer-chip" onclick="startChip(this,40*60,'Assar')">⏱ Timer forno — 40 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">8</div><div class="step-body">
+      <h3>Esfriar e cortar</h3>
+      <p>Retire do forno e deixe esfriar completamente na forma antes de cortar — <strong>no mínimo 30 min</strong>, idealmente 1h. Brownie quente desmancha. Use o papel manteiga para levantar o bloco inteiro e corte.</p>
+      <button class="timer-chip" onclick="startChip(this,60*60,'Esfriar')">⏱ Timer esfriar — 1h</button>
+    </div></div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="notes-section">
+    <h2>Notas do Cozinheiro</h2>
+    <div class="notes-box">
+      <div class="note-line">
+        <strong>Batedeira: pá sim, fouet não.</strong> A <em>pá/raquete</em> (batedor plano) mistura sem incorporar ar — é a escolha certa para brownie, especialmente com uma massa tão pesada. O <em>fouet</em> é que aera demais e deixa o brownie parecido com bolo. O <em>gancho</em> é para massas de pão e não faz sentido aqui.
+      </div>
+      <div class="note-line">
+        <strong>O teste do palito:</strong> Brownie bom sai com migalhas úmidas grudadas — não limpo. Se sair limpo, ficou seco. Se sair com massa líquida, falta mais uns 5 min.
+      </div>
+      <div class="note-line">
+        <span class="note-highlight">Dica</span>
+        <strong>Chocolate picado:</strong> Use de entre a metade até a quantidade total de chocolate presente na massa, conforme preferência. Quanto mais, mais intenso e "lávico" fica o interior. Meio amargo equilibra com o açúcar da receita, ao leite deixa mais cremoso.
+      </div>
+      <div class="note-line">
+        <strong>Por que amornar antes dos ovos?</strong> Ovo em chocolate quente cozinha imediatamente e cria pedaços de ovo cozido na massa. Aguardar 5 min evita isso.
+      </div>
+      <div class="note-line">
+        <strong>Açúcar mascavo:</strong> Além de adoçar, o mascavo tem melaço que adiciona umidade e profundidade de sabor. É parte do segredo da textura densa.
+      </div>
+    </div>
+  </section>
+
+  <footer class="recipe-footer">
+    <span class="flour-deco">— ✦ —</span>
+    Delicie-se. :)
+  </footer>
+</div>
+
+<div class="cook-btn-wrap">
+  <button class="cook-btn" onclick="enterCook()">🍫 Modo Cozinha</button>
+</div>
+
+<!-- ══ COOKING MODE ══ -->
+<div id="cooking-mode">
+  <div class="cm-topbar">
+    <div class="cm-dots" id="cm-dots"></div>
+    <span class="cm-progress-text" id="cm-prog">1 / 8</span>
+    <button class="cm-close" onclick="exitCook()">✕</button>
+  </div>
+  <div class="cm-content" id="cm-content">
+    <div class="cm-step-number" id="cm-num">01</div>
+    <div class="cm-step-title"  id="cm-title"></div>
+    <div class="cm-step-text"   id="cm-text"></div>
+  </div>
+  <div class="cm-timer-area" id="cm-timer">
+    <div class="cm-ring-wrap">
+      <svg class="cm-svg" viewBox="0 0 170 170">
+        <circle class="ring-bg"   cx="85" cy="85" r="73.5"/>
+        <circle class="ring-prog" id="cm-ring" cx="85" cy="85" r="73.5" stroke-dasharray="462" stroke-dashoffset="0"/>
+      </svg>
+      <div class="cm-time-overlay">
+        <span class="cm-time-text"  id="cm-ttext">00:00</span>
+        <span class="cm-time-label" id="cm-tlabel">restante</span>
+      </div>
+    </div>
+    <div class="cm-timer-meta" id="cm-tmeta">termina às --:--</div>
+    <div class="cm-timer-btns">
+      <button class="cm-btn-ghost"   onclick="resetTimer()">↺ Reset</button>
+      <button class="cm-btn-primary" id="cm-playbtn" onclick="toggleTimer()">▶ Iniciar</button>
+    </div>
+  </div>
+  <div class="cm-finish" id="cm-finish">
+    <div class="cm-finish-icon">🍫</div>
+    <div class="cm-finish-title">Bom Proveito!</div>
+    <div class="cm-finish-sub">Espere esfriar antes de cortar.<br>Vale a pena a paciência.</div>
+    <button class="cm-btn-primary" style="margin-top:8px" onclick="exitCook()">Voltar à receita</button>
+  </div>
+  <div class="cm-nav" id="cm-nav">
+    <button class="cm-nav-btn prev" id="cm-prev" onclick="goStep(-1)">
+      <span class="cm-nav-label">← Anterior</span>
+      <span id="cm-prev-lbl">—</span>
+    </button>
+    <button class="cm-nav-btn next" id="cm-next" onclick="goStep(1)">
+      <span class="cm-nav-label">Próximo →</span>
+      <span id="cm-next-lbl">—</span>
+    </button>
+  </div>
+</div>
+
+<script src="timers.js"></script>
+<script>
+const BASE = 1; // 1 forma
+const INGS = {
+  chocolateMelt:   { base: 200, unit: 'g',  el: 'ing-choc-melt'    },
+  butter:          { base: 150, unit: 'g',  el: 'ing-butter'        },
+  chocolatePieces: { base: 150, unit: 'g',  el: 'ing-choc-pieces'   },
+  flour:           { base: 90,  unit: 'g',  el: 'ing-flour'         },
+  cocoa:           { base: 84,  unit: 'g',  el: 'ing-cocoa'         },
+  brownSugar:      { base: 100, unit: 'g',  el: 'ing-brown'         },
+  whiteSugar:      { base: 140, unit: 'g',  el: 'ing-white'         },
+};
+const EGGS_BASE = 3;
+
+let servings = 1;
+
+function fmt(val, unit) {
+  if (unit === 'g' || unit === 'ml') return Math.round(val) + ' ' + unit;
+  return Math.round(val);
+}
+
+function changeServings(delta) {
+  servings = Math.max(1, Math.min(10, servings + delta));
+  const r = servings / BASE;
+
+  document.getElementById('srv-display').textContent = servings;
+  document.getElementById('srv-sub').textContent = '~' + (servings * 16) + ' pedaços no total';
+  document.getElementById('meta-yield').textContent = '~' + (servings * 16) + ' pedaços';
+
+  Object.entries(INGS).forEach(([, ing]) => {
+    const el = document.getElementById(ing.el);
+    el.style.opacity = '0.3';
+    el.textContent = fmt(ing.base * r, ing.unit) + (ing.unit === 'g' ? ' g' : '');
+    setTimeout(() => el.style.opacity = '1', 150);
+  });
+
+  const eggsEl = document.getElementById('ing-eggs');
+  eggsEl.style.opacity = '0.3';
+  eggsEl.textContent = Math.round(EGGS_BASE * r);
+  setTimeout(() => eggsEl.style.opacity = '1', 150);
+
+  // Update step texts
+  const cm = fmt(200 * r, 'g');
+  const bt = fmt(150 * r, 'g');
+  const fl = fmt(90  * r, 'g');
+  const cc = fmt(84  * r, 'g');
+  const bs = fmt(100 * r, 'g');
+  const ws = fmt(140 * r, 'g');
+  const eg = Math.round(EGGS_BASE * r);
+  const cp = fmt(150 * r, 'g');
+
+  document.getElementById('step-choc-melt').textContent  = cm + ' g de chocolate meio amargo';
+  document.getElementById('step-butter').textContent     = bt + ' g de manteiga';
+  document.getElementById('step-flour').textContent      = 'farinha (' + fl + ' g)';
+  document.getElementById('step-cocoa').textContent      = 'chocolate em pó (' + cc + ' g)';
+  document.getElementById('step-brown').textContent      = 'açúcar mascavo (' + bs + ' g)';
+  document.getElementById('step-white').textContent      = 'açúcar refinado (' + ws + ' g)';
+  document.getElementById('step-eggs').textContent       = eg + (eg === 1 ? ' ovo' : ' ovos');
+  document.getElementById('step-choc-pieces').textContent = cp + ' g de chocolate picado';
+}
+
+/* ══ AUDIO ══ */
+function beep() {
+  try {
+    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+    [880, 1100, 880, 1100, 880].forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type = 'sine'; o.frequency.value = f;
+      const t = ctx.currentTime + i * .38;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(.4, t + .04);
+      g.gain.exponentialRampToValueAtTime(.001, t + .32);
+      o.start(t); o.stop(t + .35);
+    });
+  } catch(e) {}
+}
+
+/* ══ WAKE LOCK ══ */
+let wl = null;
+async function grabLock() { try { if ('wakeLock' in navigator) wl = await navigator.wakeLock.request('screen'); } catch(e) {} }
+function dropLock() { if (wl) { wl.release(); wl = null; } }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && document.getElementById('cooking-mode').classList.contains('active')) grabLock();
+});
+
+/* ══ COOK STEPS ══ */
+function getCookSteps() {
+  const r = servings / BASE;
+  const cm = Math.round(200 * r) + ' g';
+  const bt = Math.round(150 * r) + ' g';
+  const fl = Math.round(90  * r) + ' g';
+  const cc = Math.round(84  * r) + ' g';
+  const bs = Math.round(100 * r) + ' g';
+  const ws = Math.round(140 * r) + ' g';
+  const eg = Math.round(EGGS_BASE * r);
+  const cp = Math.round(150 * r) + ' g';
+
+  return [
+    { title: "Preparar a forma e o forno", timer: 15*60,
+      text: `Preaqueça o forno a <strong>180 °C</strong>. Forre a forma com papel manteiga deixando sobra nas bordas, ou com manteiga e farinha/chocolate em pó. ${servings > 1 ? 'Prepare <strong>' + servings + ' formas</strong>.' : ''}` },
+    { title: "Derreter chocolate e manteiga", timer: null,
+      text: `Derreta <strong>${cm} de chocolate meio amargo</strong> com <strong>${bt} de manteiga</strong> em banho-maria ou microondas (30s por vez). Misture até liso. Cuidado apenas com a temperatura, ovos não podem ir em chocolate muito quente.` },
+    { title: "Peneirar os secos", timer: null,
+      text: `Peneire juntos: <strong>${fl} de farinha</strong>, <strong>${cc} de chocolate em pó</strong>, <strong>${bs} de açúcar mascavo</strong> e <strong>${ws} de açúcar refinado</strong>. Peneirar quebra grumos e distribui melhor.` },
+    { title: "Misturar secos no chocolate", timer: null,
+      text: `Adicione a mistura peneirada ao chocolate já morno. Use a <strong>pá/raquete</strong> da batedeira em velocidade baixa. A massa vai ficar bem espessa — é o certo.` },
+    { title: "Adicionar os ovos", timer: null,
+      text: `Adicione <strong>${eg} ${eg === 1 ? 'ovo' : 'ovos'}</strong>, um de cada vez, misturando bem após cada adição. Mistura gradual cria emulsão e dá estrutura sem desenvolver glúten.` },
+    { title: "Sal e chocolate picado", timer: null,
+      text: `Adicione uma <strong>pitada de sal</strong> e misture. Por último, incorpore os <strong>${cp} de chocolate picado</strong>. Misture só até distribuir — não exagere.` },
+    { title: "Assar", timer: 40*60,
+      text: `Despeje na forma e nivele. Forno a <strong>180 °C por 40 min</strong>. Pronto quando o centro ainda balança levemente. Palito com migalhas úmidas = perfeito.` },
+    { title: "Esfriar e cortar", timer: 60*60,
+      text: `Deixe esfriar na forma por <strong>pelo menos 1h</strong>. Use o papel manteiga para levantar.` },
+  ];
+}
+
+let cur = 0;
+function render(idx) {
+  RecipeTimers.stopStepTimer({ clearStorage: false });
+  const steps = getCookSteps();
+  const done = idx >= steps.length;
+  document.getElementById('cm-finish').classList.toggle('active', done);
+  document.getElementById('cm-content').style.display = done ? 'none' : 'flex';
+  document.getElementById('cm-timer').style.display = 'none';
+  document.getElementById('cm-nav').style.display = done ? 'none' : 'grid';
+  if (done) return;
+
+  const s = steps[idx];
+  document.getElementById('cm-prog').textContent = `${idx + 1} / ${steps.length}`;
+
+  const dots = document.getElementById('cm-dots');
+  dots.innerHTML = '';
+  steps.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'cm-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
+    dots.appendChild(d);
+  });
+
+  document.getElementById('cm-num').textContent = String(idx + 1).padStart(2, '0');
+  document.getElementById('cm-title').textContent = s.title;
+  document.getElementById('cm-text').innerHTML = s.text;
+
+  if (s.timer) {
+    RecipeTimers.prepareStepTimer(s.timer, idx);
+    document.getElementById('cm-timer').style.display = 'flex';
+  }
+
+  document.getElementById('cm-prev').disabled = idx === 0;
+  document.getElementById('cm-prev-lbl').textContent = idx > 0 ? steps[idx - 1].title : '—';
+  document.getElementById('cm-next-lbl').textContent = idx < steps.length - 1 ? steps[idx + 1].title : 'Finalizar';
+  document.getElementById('cm-content').scrollTop = 0;
+}
+
+function goStep(d) { RecipeTimers.clearStepTimer(); cur = Math.max(0, cur + d); render(cur); }
+function enterCook() { const savedStep = RecipeTimers.getSavedStep(); cur = savedStep === null ? 0 : savedStep; document.getElementById('cooking-mode').classList.add('active'); render(cur); grabLock(); document.body.style.overflow = 'hidden'; }
+function exitCook() { RecipeTimers.clearStepTimer(); document.getElementById('cooking-mode').classList.remove('active'); dropLock(); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>

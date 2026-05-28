@@ -19,12 +19,26 @@
     "file": "marry_me_chicken.html",
     "category": "Massas",
     "tags": ["chicken", "pasta", "frango"],
-    "emoji": "🍗",
+    "emoji": "💍",
     "color": "#B85C2A",
     "description": "Macarraõ com molho cremoso de tomate, e sobrecoxa desossada",
     "time": "30m",
     "difficulty": "Fácil",
     "servings": 4,
+    "added": "2026-05-21"
+  },
+      {
+    "id": "brownie",
+    "title": "Brownie",
+    "file": "brownie.html",
+    "category": "Sobremesas",
+    "tags": ["chocolate", "dessert", "bolo"],
+    "emoji": "🍫",
+    "color": "#8B4513",
+    "description": "Bolo de chocolate denso e saboroso, com pedaços de chocolate ao redor.",
+    "time": "30m",
+    "difficulty": "Fácil",
+    "servings": 8,
     "added": "2026-05-21"
   }
 ]

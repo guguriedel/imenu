@@ -35,7 +35,7 @@
 
   <section class="ingredients-section">
     <h2>Ingredientes</h2>
-    <div class="ingredient-row"><span class="amount" id="ing-flour">500 g</span><span class="ing-name">Farinha de trigo forte — tipo 1 ou 00</span></div>
+    <div class="ingredient-row"><span class="amount" id="ing-flour">500 g</span><span class="ing-name">Farinha de trigo forte (w>300) — tipo 1 ou 00</span></div>
     <div class="ingredient-row"><span class="amount" id="ing-water">325 ml</span><span class="ing-name">Água gelada (5–10 °C)</span></div>
     <div class="ingredient-row"><span class="amount" id="ing-salt">13 g</span><span class="ing-name">Sal</span></div>
     <div class="ingredient-row"><span class="amount" id="ing-yeast">1 g</span><span class="ing-name">Fermento biológico seco instantâneo</span></div>
@@ -161,6 +161,7 @@
         <span class="cm-time-label" id="cm-tlabel">restante</span>
       </div>
     </div>
+    <div class="cm-timer-meta" id="cm-tmeta">termina às --:--</div>
     <div class="cm-timer-btns">
       <button class="cm-btn-ghost"   onclick="resetTimer()">↺ Reset</button>
       <button class="cm-btn-primary" id="cm-playbtn" onclick="toggleTimer()">▶ Iniciar</button>
@@ -184,6 +185,7 @@
   </div>
 </div>
 
+<script src="timers.js"></script>
 <script>
 /* ══ BASE RECIPE (4 porções) ══ */
 const BASE = 4;
@@ -255,46 +257,6 @@ document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'&&document.getElementById('cooking-mode').classList.contains('active')) grabLock();
 });
 
-/* ══ TIMER ══ */
-const CIRC=2*Math.PI*73.5;
-let tRem=0,tTotal=0,tRunning=false,tiv=null;
-
-function fmtT(s){ return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
-function updateRing(){
-  const p=tTotal>0?tRem/tTotal:1;
-  document.getElementById('cm-ring').style.strokeDashoffset=CIRC*(1-p);
-  document.getElementById('cm-ring').classList.toggle('done',tRem===0&&tTotal>0);
-}
-function setDisplay(s){ document.getElementById('cm-ttext').textContent=fmtT(s); updateRing(); }
-
-function toggleTimer(){
-  if(tRem===0){resetTimer();return;}
-  tRunning=!tRunning;
-  const btn=document.getElementById('cm-playbtn');
-  if(tRunning){
-    btn.textContent='⏸ Pausar';
-    tiv=setInterval(()=>{
-      tRem--;
-      setDisplay(tRem);
-      if(tRem<=0){
-        clearInterval(tiv); tRunning=false;
-        btn.textContent='✓ Pronto';
-        document.getElementById('cm-tlabel').textContent='concluído!';
-        beep();
-      }
-    },1000);
-  } else {
-    clearInterval(tiv);
-    btn.textContent='▶ Continuar';
-  }
-}
-function resetTimer(){
-  clearInterval(tiv); tRunning=false; tRem=tTotal;
-  setDisplay(tRem);
-  document.getElementById('cm-playbtn').textContent='▶ Iniciar';
-  document.getElementById('cm-tlabel').textContent='restante';
-}
-
 /* ══ COOKING MODE STEPS ══ */
 function getCookSteps() {
   const s = servings;
@@ -321,7 +283,7 @@ function getCookSteps() {
 
 let cur=0;
 function render(idx){
-  clearInterval(tiv); tRunning=false;
+  RecipeTimers.stopStepTimer({ clearStorage: false });
   const steps=getCookSteps();
   const done=idx>=steps.length;
 
@@ -347,10 +309,7 @@ function render(idx){
   document.getElementById('cm-text').innerHTML=s.text;
 
   if(s.timer){
-    tTotal=s.timer; tRem=s.timer;
-    setDisplay(tRem);
-    document.getElementById('cm-playbtn').textContent='▶ Iniciar';
-    document.getElementById('cm-tlabel').textContent='restante';
+    RecipeTimers.prepareStepTimer(s.timer, idx);
     document.getElementById('cm-timer').style.display='flex';
   }
 
@@ -360,35 +319,9 @@ function render(idx){
   document.getElementById('cm-content').scrollTop=0;
 }
 
-function goStep(d){ clearInterval(tiv); tRunning=false; cur=Math.max(0,cur+d); render(cur); }
-function enterCook(){ cur=0; document.getElementById('cooking-mode').classList.add('active'); render(0); grabLock(); document.body.style.overflow='hidden'; }
-function exitCook(){ clearInterval(tiv); tRunning=false; document.getElementById('cooking-mode').classList.remove('active'); dropLock(); document.body.style.overflow=''; }
-
-/* ══ INLINE CHIP TIMERS ══ */
-const chipIntervals={};
-function startChip(btn,sec,label){
-  clearInterval(chipIntervals[label]);
-  let rem=sec;
-  btn.textContent=`⏱ ${label} — ${fmtT(rem)}`;
-  btn.style.cssText='background:var(--terracotta);color:var(--cream);border-color:var(--terracotta)';
-  btn.onclick=()=>cancelChip(btn,sec,label);
-  chipIntervals[label]=setInterval(()=>{
-    rem--;
-    btn.textContent=`⏱ ${label} — ${fmtT(rem)}`;
-    if(rem<=0){
-      clearInterval(chipIntervals[label]);
-      btn.textContent=`✓ ${label} — Pronto!`;
-      btn.style.cssText='background:#4A5C1A;color:var(--cream);border-color:#4A5C1A';
-      beep();
-    }
-  },1000);
-}
-function cancelChip(btn,sec,label){
-  clearInterval(chipIntervals[label]);
-  btn.textContent=`⏱ Timer ${Math.round(sec/60)} min`;
-  btn.style.cssText='';
-  btn.onclick=()=>startChip(btn,sec,label);
-}
+function goStep(d){ RecipeTimers.clearStepTimer(); cur=Math.max(0,cur+d); render(cur); }
+function enterCook(){ const savedStep=RecipeTimers.getSavedStep(); cur=savedStep===null?0:savedStep; document.getElementById('cooking-mode').classList.add('active'); render(cur); grabLock(); document.body.style.overflow='hidden'; }
+function exitCook(){ RecipeTimers.clearStepTimer(); document.getElementById('cooking-mode').classList.remove('active'); dropLock(); document.body.style.overflow=''; }
 </script>
 </body>
 </html>
