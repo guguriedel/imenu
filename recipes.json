@@ -40,5 +40,20 @@
     "difficulty": "Fácil",
     "servings": 8,
     "added": "2026-05-21"
+  },
+
+        {
+    "id": "focaccia",
+    "title": "Focaccia",
+    "file": "focaccia.html",
+    "category": "Pães",
+    "tags": ["pão", "italiana", "focaccia"],
+    "emoji": "🍞",
+    "color": "#D2B48C",
+    "description": "Pão italiano com sabor marcante e crosta crocante.",
+    "time": "24h",
+    "difficulty": "Médio",
+    "servings": 4,
+    "added": "2026-05-21"
   }
 ]

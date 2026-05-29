@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Focaccia sem Sova na Air Fryer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body class="recipe-page">
+
+<div class="recipe-container" id="recipe-view">
+
+  <a href="./index.html" class="back-link">← Voltar ao livro</a>
+
+  <header class="header">
+    <span class="eyebrow">Receita de Casa</span>
+    <h1>Focaccia sem Sova<br><em>na Air Fryer</em></h1>
+    <p class="tagline">Sem sova, fermentação lenta de 12–36h na geladeira. Miolo fofinho, casquinha crocante — resultado de padaria sem trabalho pesado.</p>
+  </header>
+
+  <!-- SERVINGS CONTROL -->
+  <div class="servings-bar">
+    <span class="srv-label">Focaccias</span>
+    <button class="srv-btn" onclick="changeServings(-1)">−</button>
+    <span class="srv-num" id="srv-display">1</span>
+    <button class="srv-btn" onclick="changeServings(1)">+</button>
+    <span class="srv-sub" id="srv-sub">1 focaccia · ~15 fatias</span>
+  </div>
+
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">Rendimento</span><span class="meta-value" id="meta-yield">~15 fatias</span></div>
+    <div class="meta-item"><span class="meta-label">Fermentação</span><span class="meta-value">12 – 36h</span></div>
+    <div class="meta-item"><span class="meta-label">Forno</span><span class="meta-value">200 °C · 30 min</span></div>
+  </div>
+
+  <section class="ingredients-section">
+    <h2>Ingredientes</h2>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-flour">390 g</span>
+      <span class="ing-name">Farinha de trigo<span class="ing-note">~3¼ xícaras (chá)</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-yeast">2 g</span>
+      <span class="ing-name">Fermento biológico seco<span class="ing-note">½ colher (chá)</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-salt">10 g</span>
+      <span class="ing-name">Sal<span class="ing-note">2 colheres (chá)</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-water">420 ml</span>
+      <span class="ing-name">Água morna<span class="ing-note">1¾ xícara (chá) — apenas morna (~35–40 °C), nunca quente</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-oil">60 ml</span>
+      <span class="ing-name">Azeite de oliva<span class="ing-note">4 colheres (sopa) — divididas em 2 + 2</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-coarse">2 g</span>
+      <span class="ing-name">Sal grosso<span class="ing-note">½ colher (chá) — quebrado no pilão</span></span>
+    </div>
+    <div class="ingredient-row">
+      <span class="amount" id="ing-rosemary">3 ramos</span>
+      <span class="ing-name">Alecrim fresco<span class="ing-note">debulhado sobre a massa antes de assar</span></span>
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <h2>Modo de Preparo</h2>
+
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <h3>Mistura inicial</h3>
+      <p>Numa tigela grande, misture a farinha com o fermento e o sal. Coloque toda a água morna de uma só vez e misture com a espátula de silicone. <strong>Não é necessário sovar</strong> — misture apenas até a farinha absorver toda a água. A massa fica grudenta, é assim mesmo. <strong>Não adicione mais farinha.</strong> Atenção: água muito quente acima de 45 °C destrói o fermento antes da fermentação começar.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body">
+      <h3>Besuntar com azeite</h3>
+      <p id="step-oil">Coloque <strong>2 colheres (sopa) de azeite</strong> numa tigela grande com espaço sobrando para a massa dobrar de volume. Transfira a massa e, com a espátula, vire de baixo para cima para cobrir a superfície com o azeite — não precisa incorporar, basta envolver. Cubra com filme plástico.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">3</div><div class="step-body">
+      <h3>Fermentação lenta na geladeira</h3>
+      <p>Leve à geladeira por no mínimo <strong>12 horas</strong> ou no máximo <strong>36 horas</strong>. A fermentação lenta desenvolve o glúten sem sova — a grande quantidade de água faz esse trabalho por você. Quanto mais tempo, mais complexidade de sabor. Configure um alarme no celular.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">4</div><div class="step-body">
+      <h3>Descanso na Air Fryer</h3>
+      <p>Retire a grelha do cesto da Air Fryer. Transfira a massa para o cesto, raspando bem para aproveitar todo o azeite da tigela. Encaixe o cesto na Air Fryer <strong>desligada</strong> e deixe descansar por <strong>50 minutos</strong> — a massa precisa retornar à temperatura ambiente e ficar aerada antes de assar.</p>
+      <button class="timer-chip" onclick="startChip(this,50*60,'Descanso')">⏱ Timer 50 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">5</div><div class="step-body">
+      <h3>Preparar a cobertura</h3>
+      <p id="step-topping">Bata o sal grosso no pilão apenas para quebrar em pedaços menores — não precisa virar pó. Debulhe os <strong>3 ramos de alecrim</strong> sobre a massa. Umedeça as pontas dos dedos com água e pressione toda a superfície com cuidado para não rasgar. Polvilhe o sal grosso e regue com as <strong>2 colheres (sopa) restantes de azeite</strong>.</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">6</div><div class="step-body">
+      <h3>Assar na Air Fryer</h3>
+      <p>Preencha o reservatório da Air Fryer com água filtrada. Asse na função <strong>Air Fry + Vapor, 200 °C, por 30 minutos</strong>. <strong>Não precisa preaquecer.</strong> O vapor retarda a formação da crosta no início, deixando a massa expandir — resultado: miolo fofinho e casquinha crocante.</p>
+      <button class="timer-chip" onclick="startChip(this,30*60,'Assar')">⏱ Timer 30 min</button>
+    </div></div>
+
+    <div class="step"><div class="step-num">7</div><div class="step-body">
+      <h3>Resfriar antes de fatiar</h3>
+      <p>Retire a focaccia com espátula de silicone e deixe amornar numa gradinha antes de fatiar e servir. Pode ser preparada com antecedência e servida em temperatura ambiente. Para congelar, corte em fatias e guarde por até 3 meses.</p>
+    </div></div>
+  </section>
+
+  <section class="notes-section">
+    <h2>Notas do Cozinheiro</h2>
+    <div class="notes-box">
+      <div class="note-line">
+        <strong>Por que sem sova funciona?</strong> A alta hidratação (muito mais água que uma massa convencional) permite que as proteínas da farinha se alinhem sozinhas, formando a rede de glúten gradualmente ao longo da fermentação. É o mesmo princípio do pão no-knead — o tempo substitui o trabalho.
+      </div>
+      <div class="note-line">
+        <strong>Temperatura da água:</strong> O fermento biológico trabalha entre ~20–40 °C. Acima de 45 °C as células morrem antes de fermentar. <em>Morna</em> significa confortável ao toque — como água de banho de bebê.
+      </div>
+      <div class="note-line">
+        <strong>O papel do vapor:</strong> O reservatório de água cria umidade no ambiente de assar. Isso retarda a formação da crosta nos primeiros minutos, permitindo que o interior expanda antes de firmar. No final, o calor seco dá a casquinha dourada e crocante. É exatamente o princípio dos fornos profissionais de padaria.
+      </div>
+      <div class="note-line">
+        <strong>Sem Air Fryer com vapor?</strong> Asse em forno convencional a 220 °C por 20–25 min, com uma assadeira de água na grade de baixo para criar vapor. Preaqueça o forno por 20 min antes de colocar a massa.
+      </div>
+      <div class="note-line">
+        <span class="note-highlight">Congelar</span>
+        Corte em fatias e congele por até <strong>3 meses</strong>. Para consumir, descongele em frigideira tampada em fogo baixo, no forninho elétrico ou na própria Air Fryer.
+      </div>
+    </div>
+  </section>
+
+  <footer class="recipe-footer">
+    <span class="flour-deco">— ✦ —</span>
+    Receita da Rita Lobo · Panelinha. Melhor levemente morna, com azeite extra.
+  </footer>
+</div>
+
+<div class="cook-btn-wrap">
+  <button class="cook-btn" onclick="enterCook()">🫓 Modo Cozinha</button>
+</div>
+
+<!-- ══ COOKING MODE ══ -->
+<div id="cooking-mode">
+  <div class="cm-topbar">
+    <div class="cm-dots" id="cm-dots"></div>
+    <span class="cm-progress-text" id="cm-prog">1 / 7</span>
+    <button class="cm-close" onclick="exitCook()">✕</button>
+  </div>
+  <div class="cm-content" id="cm-content">
+    <div class="cm-step-number" id="cm-num">01</div>
+    <div class="cm-step-title"  id="cm-title"></div>
+    <div class="cm-step-text"   id="cm-text"></div>
+  </div>
+  <div class="cm-timer-area" id="cm-timer">
+    <div class="cm-ring-wrap">
+      <svg class="cm-svg" viewBox="0 0 170 170">
+        <circle class="ring-bg"   cx="85" cy="85" r="73.5"/>
+        <circle class="ring-prog" id="cm-ring" cx="85" cy="85" r="73.5" stroke-dasharray="462" stroke-dashoffset="0"/>
+      </svg>
+      <div class="cm-time-overlay">
+        <span class="cm-time-text"  id="cm-ttext">00:00</span>
+        <span class="cm-time-label" id="cm-tlabel">restante</span>
+      </div>
+    </div>
+    <div class="cm-timer-meta" id="cm-tmeta">termina às --:--</div>
+    <div class="cm-timer-btns">
+      <button class="cm-btn-ghost"   onclick="resetTimer()">↺ Reset</button>
+      <button class="cm-btn-primary" id="cm-playbtn" onclick="toggleTimer()">▶ Iniciar</button>
+    </div>
+  </div>
+  <div class="cm-finish" id="cm-finish">
+    <div class="cm-finish-icon">🫓</div>
+    <div class="cm-finish-title">Boa Focaccia!</div>
+    <div class="cm-finish-sub">Todos os passos concluídos.<br>Deixe amornar antes de fatiar.</div>
+    <button class="cm-btn-primary" style="margin-top:8px" onclick="exitCook()">Voltar à receita</button>
+  </div>
+  <div class="cm-nav" id="cm-nav">
+    <button class="cm-nav-btn prev" id="cm-prev" onclick="goStep(-1)">
+      <span class="cm-nav-label">← Anterior</span>
+      <span id="cm-prev-lbl">—</span>
+    </button>
+    <button class="cm-nav-btn next" id="cm-next" onclick="goStep(1)">
+      <span class="cm-nav-label">Próximo →</span>
+      <span id="cm-next-lbl">—</span>
+    </button>
+  </div>
+</div>
+
+<script src="timers.js"></script>
+<script>
+/* ══ BASE RECIPE (1 focaccia = ~15 fatias) ══ */
+const BASE = 1;
+const INGS = {
+  flour:  { base: 390, unit: 'g',  el: 'ing-flour'  },
+  yeast:  { base: 2,   unit: 'g',  el: 'ing-yeast'  },
+  salt:   { base: 10,  unit: 'g',  el: 'ing-salt'   },
+  water:  { base: 420, unit: 'ml', el: 'ing-water'  },
+  oil:    { base: 60,  unit: 'ml', el: 'ing-oil'    },
+  coarse: { base: 2,   unit: 'g',  el: 'ing-coarse' },
+};
+
+let servings = 1;
+
+function fmt_ing(val, unit) {
+  if (val < 2) return val.toFixed(1).replace('.0', '') + ' ' + unit;
+  return Math.round(val) + ' ' + unit;
+}
+
+function changeServings(delta) {
+  servings = Math.max(1, Math.min(10, servings + delta));
+  const ratio = servings / BASE;
+
+  document.getElementById('srv-display').textContent = servings;
+  document.getElementById('srv-sub').textContent =
+    servings + ' focaccia' + (servings > 1 ? 's' : '') + ' · ~' + (servings * 15) + ' fatias';
+  document.getElementById('meta-yield').textContent =
+    '~' + (servings * 15) + ' fatias';
+
+  // Ingredientes com flash
+  Object.values(INGS).forEach(ing => {
+    const el = document.getElementById(ing.el);
+    el.style.opacity = '0.3';
+    el.textContent = fmt_ing(ing.base * ratio, ing.unit);
+    setTimeout(() => el.style.opacity = '1', 150);
+  });
+
+  // Alecrim (escala por ramos inteiros)
+  const rEl = document.getElementById('ing-rosemary');
+  rEl.style.opacity = '0.3';
+  rEl.textContent = (servings * 3) + ' ramos';
+  setTimeout(() => rEl.style.opacity = '1', 150);
+
+  // Atualiza texto do passo 2 (metade do azeite vai para a tigela)
+  const oil1 = fmt_ing(30 * ratio, 'ml');
+  document.getElementById('step-oil').innerHTML =
+    'Coloque <strong>' + oil1 + ' de azeite</strong> numa tigela grande com espaço sobrando para a massa dobrar de volume. Transfira a massa e, com a espátula, vire de baixo para cima para cobrir a superfície com o azeite — não precisa incorporar, basta envolver. Cubra com filme plástico.';
+
+  // Atualiza texto do passo 5 (outra metade do azeite na cobertura)
+  const oil2 = fmt_ing(30 * ratio, 'ml');
+  const ros = (servings * 3) + ' ramos';
+  document.getElementById('step-topping').innerHTML =
+    'Bata o sal grosso no pilão apenas para quebrar em pedaços menores — não precisa virar pó. Debulhe <strong>' + ros + ' de alecrim</strong> sobre a massa. Umedeça as pontas dos dedos com água e pressione toda a superfície com cuidado para não rasgar. Polvilhe o sal grosso e regue com <strong>' + oil2 + ' de azeite</strong>.';
+}
+
+/* ══ AUDIO — timers.js chama window.beep() ══ */
+function beep() {
+  try {
+    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+    [880, 1100, 880, 1100, 880].forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type = 'sine'; o.frequency.value = f;
+      const t = ctx.currentTime + i * .38;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(.4, t + .04);
+      g.gain.exponentialRampToValueAtTime(.001, t + .32);
+      o.start(t); o.stop(t + .35);
+    });
+  } catch(e) {}
+}
+
+/* ══ WAKE LOCK ══ */
+let wl = null;
+async function grabLock() { try { if ('wakeLock' in navigator) wl = await navigator.wakeLock.request('screen'); } catch(e) {} }
+function dropLock() { if (wl) { wl.release(); wl = null; } }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && document.getElementById('cooking-mode').classList.contains('active')) grabLock();
+});
+
+/* ══ COOKING MODE STEPS ══ */
+function getCookSteps() {
+  const ratio = servings / BASE;
+  const flour  = fmt_ing(390 * ratio, 'g');
+  const yeast  = fmt_ing(2   * ratio, 'g');
+  const salt   = fmt_ing(10  * ratio, 'g');
+  const water  = fmt_ing(420 * ratio, 'ml');
+  const oil1   = fmt_ing(30  * ratio, 'ml');
+  const oil2   = fmt_ing(30  * ratio, 'ml');
+  const ros    = (servings * 3) + ' ramos';
+
+  return [
+    {
+      title: "Mistura inicial",
+      timer: null,
+      text: `Misture <strong>${flour} de farinha</strong>, <strong>${yeast} de fermento</strong> e <strong>${salt} de sal</strong> numa tigela grande. Adicione <strong>${water} de água morna</strong> de uma só vez e misture com a espátula. <strong>Não é preciso sovar.</strong> A massa fica grudenta — não adicione mais farinha.`
+    },
+    {
+      title: "Besuntar com azeite",
+      timer: null,
+      text: `Coloque <strong>${oil1} de azeite</strong> numa tigela grande com espaço para a massa crescer. Transfira a massa e vire com a espátula para cobrir a superfície. Cubra com filme plástico e leve à geladeira.`
+    },
+    {
+      title: "Fermentação na geladeira",
+      timer: null,
+      text: `Deixe na geladeira por no mínimo <strong>12 horas</strong> ou no máximo <strong>36 horas</strong>. A fermentação lenta desenvolve o glúten sem sova. <strong>Configure um alarme</strong> para retomar no momento certo.`
+    },
+    {
+      title: "Descanso na Air Fryer",
+      timer: 50 * 60,
+      text: `Retire a grelha do cesto. Transfira a massa para o cesto raspando todo o azeite da tigela. Encaixe o cesto na Air Fryer <strong>desligada</strong> e deixe descansar <strong>50 minutos</strong> em temperatura ambiente.`
+    },
+    {
+      title: "Preparar a cobertura",
+      timer: null,
+      text: `Bata o sal grosso no pilão (não vira pó). Debulhe <strong>${ros} de alecrim</strong> sobre a massa. Umedeça os dedos com água e pressione toda a superfície com cuidado para não rasgar. Polvilhe o sal grosso e regue com <strong>${oil2} de azeite</strong>.`
+    },
+    {
+      title: "Assar na Air Fryer",
+      timer: 30 * 60,
+      text: `Preencha o reservatório com água filtrada. Asse em <strong>Air Fry + Vapor, 200 °C, por 30 minutos</strong>. <strong>Não precisa preaquecer.</strong> O vapor garante miolo fofinho e casquinha crocante.`
+    },
+    {
+      title: "Resfriar e servir",
+      timer: null,
+      text: `Retire com espátula de silicone e deixe amornar numa gradinha antes de fatiar. Sirva com azeite extra. Para congelar, corte em fatias e guarde por até 3 meses.`
+    },
+  ];
+}
+
+let cur = 0;
+function render(idx) {
+  RecipeTimers.stopStepTimer({ clearStorage: false });
+  const steps = getCookSteps();
+  const done = idx >= steps.length;
+
+  document.getElementById('cm-finish').classList.toggle('active', done);
+  document.getElementById('cm-content').style.display = done ? 'none' : 'flex';
+  document.getElementById('cm-timer').style.display = 'none';
+  document.getElementById('cm-nav').style.display = done ? 'none' : 'grid';
+  if (done) return;
+
+  const s = steps[idx];
+  document.getElementById('cm-prog').textContent = `${idx + 1} / ${steps.length}`;
+
+  const dots = document.getElementById('cm-dots');
+  dots.innerHTML = '';
+  steps.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'cm-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
+    dots.appendChild(d);
+  });
+
+  document.getElementById('cm-num').textContent = String(idx + 1).padStart(2, '0');
+  document.getElementById('cm-title').textContent = s.title;
+  document.getElementById('cm-text').innerHTML = s.text;
+
+  if (s.timer) {
+    RecipeTimers.prepareStepTimer(s.timer, idx);
+    document.getElementById('cm-timer').style.display = 'flex';
+  }
+
+  document.getElementById('cm-prev').disabled = idx === 0;
+  document.getElementById('cm-prev-lbl').textContent = idx > 0 ? steps[idx - 1].title : '—';
+  document.getElementById('cm-next-lbl').textContent = idx < steps.length - 1 ? steps[idx + 1].title : 'Finalizar';
+  document.getElementById('cm-content').scrollTop = 0;
+}
+
+function goStep(d) { RecipeTimers.clearStepTimer(); cur = Math.max(0, cur + d); render(cur); }
+function enterCook() { const savedStep = RecipeTimers.getSavedStep(); cur = savedStep === null ? 0 : savedStep; document.getElementById('cooking-mode').classList.add('active'); render(cur); grabLock(); document.body.style.overflow = 'hidden'; }
+function exitCook() { RecipeTimers.clearStepTimer(); document.getElementById('cooking-mode').classList.remove('active'); dropLock(); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>
